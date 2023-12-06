@@ -15,7 +15,7 @@ type Driver struct {
 	Name      string `json:"name"`
 	LastName  string `json:"lastname"`
 	Team      string `json:"team"`
-	DateBirth string `json:"dateBirth"`
+	DateBirth string `json:"date_birth"`
 }
 
 func main() {
