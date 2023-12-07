@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/SergiioDev/learning-go/config"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -19,11 +20,15 @@ type Driver struct {
 }
 
 func main() {
+	conf := config.New()
+
 	router := httprouter.New()
 	router.GET("/drivers", Drivers)
 	router.POST("/drivers", DriversCreate)
 	router.GET("/drivers/:name", DriverByName)
-	log.Fatal(http.ListenAndServe(":8080", router))
+	serverPort := ":%s"
+
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(serverPort, conf.Server.Port), router))
 }
 
 var drivers = []Driver{
