@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/joeshaw/envdecode"
+	"github.com/joho/godotenv"
 )
 
 type Conf struct {
@@ -12,7 +13,7 @@ type Conf struct {
 }
 
 type ConfServer struct {
-	Port uint16 `env:"SERVER_PORT,required"`
+	Port string `env:"SERVER_PORT,required"`
 }
 
 type ConfDB struct {
@@ -25,6 +26,7 @@ type ConfDB struct {
 }
 
 func New() *Conf {
+	loadEnvFile()
 	var conf Conf
 	err := envdecode.StrictDecode(&conf)
 	if err != nil {
@@ -34,10 +36,18 @@ func New() *Conf {
 }
 
 func NewDB() *ConfDB {
+	loadEnvFile()
 	var confDb ConfDB
 	err := envdecode.Decode(&confDb)
 	if err != nil {
 		log.Fatalf("Error decoding env variables into confDb struct %s", err.Error())
 	}
 	return &confDb
+}
+
+func loadEnvFile() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file: %s", err.Error())
+	}
 }

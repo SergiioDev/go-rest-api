@@ -27,8 +27,8 @@ func main() {
 	router.POST("/drivers", DriversCreate)
 	router.GET("/drivers/:name", DriverByName)
 	serverPort := ":%s"
-
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(serverPort, conf.Server.Port), router))
+
 }
 
 var drivers = []Driver{
