@@ -19,6 +19,8 @@ type Driver struct {
 	DateBirth string `json:"date_birth"`
 }
 
+// TODO Move this implementations to te handlers with db connections instead of getting the data from a slice
+
 func main() {
 	conf := config.New()
 
@@ -36,7 +38,6 @@ var drivers = []Driver{
 }
 
 func Drivers(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	log.Println("Handling GET /drivers request")
 	w.Header().Set("Content-Type", "application/json")
 	res, err := json.Marshal(drivers)
 	if err != nil {
