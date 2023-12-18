@@ -19,7 +19,7 @@ type Driver struct {
 	DateBirth string `json:"date_birth"`
 }
 
-// TODO Move this implementations to te handlers with db connections instead of getting the data from a slice
+// TODO Move this implementations to the handlers with db connections instead of getting the data from a slice
 
 func main() {
 	conf := config.New()
